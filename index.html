@@ -84,6 +84,35 @@
             letter-spacing: 0.2em;
         }
 
+        /* Live Clock */
+        .live-clock {
+            margin-top: 1.5rem;
+            padding: 1rem 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .clock-time {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 20px rgba(0, 245, 212, 0.3);
+        }
+
+        .clock-zone {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            background: var(--bg-tertiary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
         /* Tab Navigation */
         .tabs {
             display: flex;
@@ -446,6 +475,52 @@
             50% { opacity: 0.5; }
         }
 
+        /* Last Run Display */
+        .last-run {
+            margin-top: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            border-left: 3px solid var(--success);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .last-run-label {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .last-run-time {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .run-status {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .run-status.success {
+            background: rgba(0, 217, 163, 0.15);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .run-status.failed {
+            background: rgba(255, 0, 110, 0.15);
+            color: var(--accent-magenta);
+            border: 1px solid var(--accent-magenta);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
@@ -460,6 +535,10 @@
         <header>
             <h1>⚡ OPENCLAW CONTROL</h1>
             <p class="subtitle">System Dashboard // v2.5</p>
+            <div class="live-clock" id="liveClock">
+                <span class="clock-time">--:--:--</span>
+                <span class="clock-zone">GMT+8</span>
+            </div>
         </header>
 
         <div class="tabs">
@@ -670,6 +749,11 @@
                         <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">
                             Backs up workspace files and installed skills to GitHub repo
                         </div>
+                        <div class="last-run">
+                            <span class="last-run-label">Last Run:</span>
+                            <span class="last-run-time" id="lastRunTime">Feb 28, 2026 at 3:00:00 AM</span>
+                            <span class="run-status success">✓ Success</span>
+                        </div>
                     </div>
                     <span class="cron-status">Active</span>
                 </div>
@@ -703,6 +787,24 @@
     </div>
 
     <script>
+        // Live Clock - GMT+8
+        function updateClock() {
+            const now = new Date();
+            const options = {
+                timeZone: 'Asia/Singapore',
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            const timeString = now.toLocaleTimeString('en-US', options);
+            document.getElementById('liveClock').querySelector('.clock-time').textContent = timeString;
+        }
+
+        // Update clock immediately and every second
+        updateClock();
+        setInterval(updateClock, 1000);
+
         // Tab switching
         function showTab(tabName) {
             // Hide all tabs
