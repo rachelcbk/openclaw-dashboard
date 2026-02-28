@@ -239,6 +239,72 @@
             line-height: 1.6;
         }
 
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 245, 212, 0.1);
+        }
+
+        .skill-card.external {
+            border-left: 3px solid var(--accent-magenta);
+        }
+
+        .skill-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .skill-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .skill-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+        }
+
+        .skill-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-meta {
+            font-size: 0.7rem;
+            color: var(--accent-gold);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
         /* File List */
         .file-grid {
             display: grid;
@@ -543,6 +609,7 @@
 
         <div class="tabs">
             <button class="tab active" onclick="showTab('skills')">🔧 Installed Skills</button>
+            <button class="tab" onclick="showTab('available')">📦 Available Skills</button>
             <button class="tab" onclick="showTab('workspace')">📁 Workspace Files</button>
             <button class="tab" onclick="showTab('tokens')">📊 Token Usage</button>
             <button class="tab" onclick="showTab('cron')">⏰ Cron Jobs</button>
@@ -596,6 +663,487 @@
                     <span class="card-badge">Document</span>
                 </div>
                 <div class="card-description">Excel spreadsheets - formulas, formatting, data analysis</div>
+            </div>
+        </div>
+
+        <!-- Available Skills Tab -->
+        <div id="available" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Built-in OpenClaw Skills</span>
+                    <span class="card-badge">50+ Available</span>
+                </div>
+                <div class="card-description">Skills included with OpenClaw. Click to install or learn more.</div>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card" data-category="productivity">
+                    <div class="skill-icon">🐙</div>
+                    <div class="skill-info">
+                        <div class="skill-name">github</div>
+                        <div class="skill-desc">Interact with GitHub using gh CLI. Issues, PRs, CI runs, and API queries.</div>
+                        <div class="skill-meta">Requires: gh CLI</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="productivity">
+                    <div class="skill-icon">📝</div>
+                    <div class="skill-info">
+                        <div class="skill-name">notion</div>
+                        <div class="skill-desc">Notion API for creating and managing pages, databases, and blocks.</div>
+                        <div class="skill-meta">Requires: NOTION_API_KEY</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="productivity">
+                    <div class="skill-icon">📋</div>
+                    <div class="skill-info">
+                        <div class="skill-name">trello</div>
+                        <div class="skill-desc">Manage Trello boards, lists, and cards via the Trello REST API.</div>
+                        <div class="skill-meta">Requires: TRELLO_API_KEY, TRELLO_TOKEN</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="productivity">
+                    <div class="skill-icon">💬</div>
+                    <div class="skill-info">
+                        <div class="skill-name">slack</div>
+                        <div class="skill-desc">Send messages and interact with Slack channels and users.</div>
+                        <div class="skill-meta">Requires: Slack bot token</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="productivity">
+                    <div class="skill-icon">🎵</div>
+                    <div class="skill-info">
+                        <div class="skill-name">spotify-player</div>
+                        <div class="skill-desc">Control Spotify playback and manage playlists.</div>
+                        <div class="skill-meta">Requires: Spotify API credentials</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="ai">
+                    <div class="skill-icon">🖼️</div>
+                    <div class="skill-info">
+                        <div class="skill-name">openai-image-gen</div>
+                        <div class="skill-desc">Generate images using OpenAI's DALL-E models.</div>
+                        <div class="skill-meta">Requires: OPENAI_API_KEY</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="ai">
+                    <div class="skill-icon">🎙️</div>
+                    <div class="skill-info">
+                        <div class="skill-name">openai-whisper</div>
+                        <div class="skill-desc">Transcribe audio using OpenAI's Whisper model.</div>
+                        <div class="skill-meta">Requires: OPENAI_API_KEY</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="ai">
+                    <div class="skill-icon">✨</div>
+                    <div class="skill-info">
+                        <div class="skill-name">gemini</div>
+                        <div class="skill-desc">Google Gemini AI integration for text and multimodal tasks.</div>
+                        <div class="skill-meta">Requires: GEMINI_API_KEY</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="system">
+                    <div class="skill-icon">🔐</div>
+                    <div class="skill-info">
+                        <div class="skill-name">1password</div>
+                        <div class="skill-desc">Access and manage passwords from 1Password vaults.</div>
+                        <div class="skill-meta">Requires: 1Password CLI</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="system">
+                    <div class="skill-icon">🖥️</div>
+                    <div class="skill-info">
+                        <div class="skill-name">tmux</div>
+                        <div class="skill-desc">Control tmux sessions for remote terminal management.</div>
+                        <div class="skill-meta">Requires: tmux</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="system">
+                    <div class="skill-icon">📊</div>
+                    <div class="skill-info">
+                        <div class="skill-name">canvas</div>
+                        <div class="skill-desc">Present and control browser canvases for visual output.</div>
+                        <div class="skill-meta">Built-in</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="media">
+                    <div class="skill-icon">🎨</div>
+                    <div class="skill-info">
+                        <div class="skill-name">gifgrep</div>
+                        <div class="skill-desc">Search and retrieve GIFs from various sources.</div>
+                        <div class="skill-meta">Built-in</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="media">
+                    <div class="skill-icon">🔊</div>
+                    <div class="skill-info">
+                        <div class="skill-name">sag</div>
+                        <div class="skill-desc">ElevenLabs text-to-speech for voice generation.</div>
+                        <div class="skill-meta">Requires: ElevenLabs API key</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="media">
+                    <div class="skill-icon">🎬</div>
+                    <div class="skill-info">
+                        <div class="skill-name">video-frames</div>
+                        <div class="skill-desc">Extract and analyze frames from video files.</div>
+                        <div class="skill-meta">Requires: ffmpeg</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="notes">
+                    <div class="skill-icon">📝</div>
+                    <div class="skill-info">
+                        <div class="skill-name">obsidian</div>
+                        <div class="skill-desc">Interact with Obsidian vaults and notes.</div>
+                        <div class="skill-meta">Requires: Obsidian local REST API</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="notes">
+                    <div class="skill-icon">🐻</div>
+                    <div class="skill-info">
+                        <div class="skill-name">bear-notes</div>
+                        <div class="skill-desc">Create and search Bear notes on macOS.</div>
+                        <div class="skill-meta">Requires: Bear app (macOS)</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="notes">
+                    <div class="skill-icon">🍎</div>
+                    <div class="skill-info">
+                        <div class="skill-name">apple-notes</div>
+                        <div class="skill-desc">Read and create Apple Notes on macOS.</div>
+                        <div class="skill-meta">Requires: macOS</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="communication">
+                    <div class="skill-icon">💬</div>
+                    <div class="skill-info">
+                        <div class="skill-name">discord</div>
+                        <div class="skill-desc">Send messages and interact with Discord servers.</div>
+                        <div class="skill-meta">Requires: Discord bot token</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="communication">
+                    <div class="skill-icon">📱</div>
+                    <div class="skill-info">
+                        <div class="skill-name">imsg</div>
+                        <div class="skill-desc">Send iMessages on macOS.</div>
+                        <div class="skill-meta">Requires: macOS + iMessage</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="communication">
+                    <div class="skill-icon">🔵</div>
+                    <div class="skill-info">
+                        <div class="skill-name">bluebubbles</div>
+                        <div class="skill-desc">Send iMessages via BlueBubbles server.</div>
+                        <div class="skill-meta">Requires: BlueBubbles server</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="smart-home">
+                    <div class="skill-icon">💡</div>
+                    <div class="skill-info">
+                        <div class="skill-name">openhue</div>
+                        <div class="skill-desc">Control Philips Hue lights and scenes.</div>
+                        <div class="skill-meta">Requires: Hue Bridge</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="smart-home">
+                    <div class="skill-icon">🔊</div>
+                    <div class="skill-info">
+                        <div class="skill-name">sonoscli</div>
+                        <div class="skill-desc">Control Sonos speakers and playlists.</div>
+                        <div class="skill-meta">Requires: Sonos system</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="development">
+                    <div class="skill-icon">🤖</div>
+                    <div class="skill-info">
+                        <div class="skill-name">coding-agent</div>
+                        <div class="skill-desc">Spawn coding sub-agents for complex development tasks.</div>
+                        <div class="skill-meta">Built-in</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="development">
+                    <div class="skill-icon">🔧</div>
+                    <div class="skill-info">
+                        <div class="skill-name">skill-creator</div>
+                        <div class="skill-desc">Create and package new OpenClaw skills.</div>
+                        <div class="skill-meta">Built-in</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">📷</div>
+                    <div class="skill-info">
+                        <div class="skill-name">camsnap</div>
+                        <div class="skill-desc">Capture photos from connected cameras.</div>
+                        <div class="skill-meta">Requires: Camera access</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">☁️</div>
+                    <div class="skill-info">
+                        <div class="skill-name">gog</div>
+                        <div class="skill-desc">Google Workspace CLI for Gmail, Calendar, Drive, Contacts, Sheets, Docs.</div>
+                        <div class="skill-meta">Requires: gog CLI + OAuth</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">🔍</div>
+                    <div class="skill-info">
+                        <div class="skill-name">clawhub</div>
+                        <div class="skill-desc">Browse and install skills from the ClawHub marketplace.</div>
+                        <div class="skill-meta">Built-in</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">🎵</div>
+                    <div class="skill-info">
+                        <div class="skill-name">songsee</div>
+                        <div class="skill-desc">Identify songs and manage music recognition.</div>
+                        <div class="skill-meta">Built-in</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">📰</div>
+                    <div class="skill-info">
+                        <div class="skill-name">blogwatcher</div>
+                        <div class="skill-desc">Monitor RSS feeds and blog updates.</div>
+                        <div class="skill-meta">Built-in</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">🍔</div>
+                    <div class="skill-info">
+                        <div class="skill-name">food-order</div>
+                        <div class="skill-desc">Order food from various delivery services.</div>
+                        <div class="skill-meta">Service-specific setup</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">📊</div>
+                    <div class="skill-info">
+                        <div class="skill-name">model-usage</div>
+                        <div class="skill-desc">Track and analyze AI model usage statistics.</div>
+                        <div class="skill-meta">Built-in</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">📝</div>
+                    <div class="skill-info">
+                        <div class="skill-name">summarize</div>
+                        <div class="skill-desc">Summarize text, documents, and conversations.</div>
+                        <div class="skill-meta">Built-in</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">✅</div>
+                    <div class="skill-info">
+                        <div class="skill-name">things-mac</div>
+                        <div class="skill-desc">Manage tasks in Things app on macOS.</div>
+                        <div class="skill-meta">Requires: Things app (macOS)</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">🍎</div>
+                    <div class="skill-info">
+                        <div class="skill-name">apple-reminders</div>
+                        <div class="skill-desc">Create and manage Apple Reminders on macOS.</div>
+                        <div class="skill-meta">Requires: macOS</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">📧</div>
+                    <div class="skill-info">
+                        <div class="skill-name">himalaya</div>
+                        <div class="skill-desc">CLI email client for managing emails.</div>
+                        <div class="skill-meta">Requires: himalaya CLI</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">🔊</div>
+                    <div class="skill-info">
+                        <div class="skill-name">sherpa-onnx-tts</div>
+                        <div class="skill-desc">Local text-to-speech using Sherpa ONNX.</div>
+                        <div class="skill-meta">Requires: sherpa-onnx</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">🎙️</div>
+                    <div class="skill-info">
+                        <div class="skill-name">voice-call</div>
+                        <div class="skill-desc">Make voice calls using various providers.</div>
+                        <div class="skill-meta">Service-specific setup</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">📱</div>
+                    <div class="skill-info">
+                        <div class="skill-name">wacli</div>
+                    <div class="skill-desc">WhatsApp CLI for sending and receiving messages.</div>
+                        <div class="skill-meta">Requires: WhatsApp Business API</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">🔌</div>
+                    <div class="skill-info">
+                        <div class="skill-name">mcporter</div>
+                        <div class="skill-desc">Minecraft server management and monitoring.</div>
+                        <div class="skill-meta">Requires: Minecraft server</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">🎮</div>
+                    <div class="skill-info">
+                        <div class="skill-name">eightctl</div>
+                        <div class="skill-desc">Control 8BitDo controllers and devices.</div>
+                        <div class="skill-meta">Requires: 8BitDo device</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">🗺️</div>
+                    <div class="skill-info">
+                        <div class="skill-name">goplaces</div>
+                        <div class="skill-desc">Location-based services and place search.</div>
+                        <div class="skill-meta">Requires: Google Places API</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">🔮</div>
+                    <div class="skill-info">
+                        <div class="skill-name">oracle</div>
+                        <div class="skill-desc">Database management and SQL queries.</div>
+                        <div class="skill-meta">Requires: Oracle DB</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">🛒</div>
+                    <div class="skill-info">
+                        <div class="skill-name">ordercli</div>
+                        <div class="skill-desc">Command-line ordering system for various services.</div>
+                        <div class="skill-meta">Service-specific setup</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">👀</div>
+                    <div class="skill-info">
+                        <div class="skill-name">peekaboo</div>
+                        <div class="skill-desc">Screen capture and monitoring utilities.</div>
+                        <div class="skill-meta">Built-in</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">📜</div>
+                    <div class="skill-info">
+                        <div class="skill-name">session-logs</div>
+                        <div class="skill-desc">Manage and analyze OpenClaw session logs.</div>
+                        <div class="skill-meta">Built-in</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">🔵</div>
+                    <div class="skill-info">
+                        <div class="skill-name">blucli</div>
+                        <div class="skill-desc">Bluetooth device management and control.</div>
+                        <div class="skill-meta">Requires: bluetooth support</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">🍌</div>
+                    <div class="skill-info">
+                        <div class="skill-name">nano-banana-pro</div>
+                        <div class="skill-desc">Advanced banana detection and analysis (meme skill).</div>
+                        <div class="skill-meta">Built-in</div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-category="utility">
+                    <div class="skill-icon">📄</div>
+                    <div class="skill-info">
+                        <div class="skill-name">nano-pdf</div>
+                        <div class="skill-desc">Lightweight PDF operations and viewing.</div>
+                        <div class="skill-meta">Built-in</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 2rem;">
+                <div class="card-header">
+                    <span class="card-title">Install from ClawHub</span>
+                    <span class="card-badge">Community</span>
+                </div>
+                <div class="card-description">
+                    Browse and install community-created skills from <a href="https://clawhub.com" target="_blank" style="color: var(--accent-cyan);">clawhub.com</a>
+                </div>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card external" data-category="community">
+                    <div class="skill-icon">🏥</div>
+                    <div class="skill-info">
+                        <div class="skill-name">healthcheck</div>
+                        <div class="skill-desc">Host security hardening and risk assessment for OpenClaw deployments.</div>
+                        <div class="skill-meta">Source: OpenClaw built-in</div>
+                    </div>
+                </div>
+
+                <div class="skill-card external" data-category="community">
+                    <div class="skill-icon">🌤️</div>
+                    <div class="skill-info">
+                        <div class="skill-name">weather</div>
+                        <div class="skill-desc">Get current weather and forecasts (no API key required).</div>
+                        <div class="skill-meta">Source: OpenClaw built-in</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 2rem; text-align: center;">
+                <div class="card-description">
+                    💡 <strong>Tip:</strong> To install any skill, tell me "install [skill-name]" and I'll set it up for you!
+                </div>
             </div>
         </div>
 
